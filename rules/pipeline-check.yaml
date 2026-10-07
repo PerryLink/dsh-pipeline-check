@@ -1,0 +1,201 @@
+# 项目全流程文件链条核对 规则库
+#
+# 规则数据与代码分离：替换本文件即可切换规则集版本，无需改动 TypeScript。
+#
+# 条款引用纪律（由 shared/ruleset.ts 强制校验）：
+#   - 每条规则必须写全 document / number / clause / excerpt / kind / source，
+#     且 excerpt 必须是逐字摘录，不得改写。
+#   - kind: direct                       条款直接规定了所检查的要求
+#   - kind: derived-from-principle       条款未直接规定，仅能由原则性条款推论（severity 最多 warn）
+#   - kind: institutional-configuration 阈值出自本机构配置（severity 最多 info）
+#
+# ⚠️⚠️ 本规则库最重要的说明：**这里没有可引的国家标准，而且不假装有。**
+#   本插件核对的是"项目全流程文件链条台账"（立项—可研—初设—概算—招标—合同—开工—变更—结算—决算）
+#   的**齐备性与时间、金额自洽**。
+#   项目流程的环节划分与审批权限**由各单位的项目管理办法与投资管理制度规定**，
+#   不同行业（电力、市政、房建、水利）、不同投资主体（政府投资、企业投资）的环节与口径都不同，
+#   **不存在全国统一的环节清单**。因此每条规则的 basis 都如实写明
+#   "本条依据为链条自洽与可追溯性，不存在可引用的标准条文"，而不是编一个标准号出来。
+#
+# ⚠️⚠️ 另一条**必须保留**的边界：**本插件绝不判定项目是否合规、
+#   审批是否越权、投资是否超概、是否应当追责**。
+#   那取决于本单位的投资管理制度、审批权限与行业规定，是投资管理与审计部门的判断。
+#   → 因此本插件只核对**台账自身的齐备与自洽**：
+#     关键环节是否登记、环节顺序是否与配置的顺序表一致、日期是否可解析且先后成立、
+#     金额是否可解析、同一文件编号是否重复、是否残留模板占位符。
+#   → **环节顺序表（stageOrder）与应登记环节清单（requiredStages）出厂为空**，
+#     未配置即进 skipped——**本插件不替使用方规定项目应当经过哪些环节**。
+
+plugin: dsh-pipeline-check
+version: "2026.1"
+
+rules:
+  - id: PC-001
+    title: 项目台账应声明项目名称与编号
+    severity: warn
+    basis:
+      document: 本机构项目管理办法与投资管理制度（无国家标准）
+      number: 无统一标准（本条依据为台账可追溯性）
+      clause: 不属于标准条款（本条为台账齐备性核对）
+      excerpt: 本条依据为台账可追溯性要求，不存在可引用的标准条文；本规则库不伪造引文。
+      kind: derived-from-principle
+      source: https://www.gov.cn/
+    params:
+      check:
+        kind: headerPresence
+        fields: [project, projectNo]
+    note: >-
+      台账若不写明项目名称与编号，链条上的文件无法与具体项目对应，
+      金额累计与时间顺序都失去主体。**本条没有标准条文可引**——
+      项目环节划分由各单位管理办法规定，不存在全国统一标准，故按可追溯性这一功能前提判定并封顶 warn。
+      配置项 project 对应材料顶层的项目名称，projectNo 对应项目编号。
+
+  - id: PC-002
+    title: 环节台账应填写环节名称与文件名称
+    severity: warn
+    basis:
+      document: 本机构项目管理办法与投资管理制度（无国家标准）
+      number: 无统一标准（本条依据为链条齐备性）
+      clause: 不属于标准条款（本条为台账齐备性核对）
+      excerpt: 本条依据为项目链条齐备性要求，不存在可引用的标准条文；本规则库不伪造引文。
+      kind: derived-from-principle
+      source: https://www.gov.cn/
+    params:
+      check:
+        kind: presenceAny
+        fields: [stage, document]
+        fix: 补填环节名称与文件名称；本条只核对是否填写，不判断该环节是否应当办理
+    note: >-
+      链条核对的最小单位是"某个环节的某份文件"：缺其一，这一行就无法纳入链条判断。
+      **本条没有标准条文可引**，故按功能前提判定并封顶 warn。
+      本条只核对"至少填了一个"，**不判断该环节是否应当办理、文件是否齐全**。
+
+  - id: PC-003
+    title: 环节顺序应与本机构配置的顺序一致
+    severity: info
+    basis:
+      document: 本机构项目管理办法与投资管理制度（无国家标准）
+      number: 无统一标准（本条依据为本机构配置的环节顺序表）
+      clause: 不属于标准条款（本条为本机构配置的顺序核对）
+      excerpt: 本条依据为本机构配置的环节顺序表，不存在可引用的标准条文；本规则库不伪造引文。
+      kind: institutional-configuration
+      source: https://www.gov.cn/
+    params:
+      check:
+        kind: monotonicSequence
+        field: stage
+        order: []
+    note: >-
+      `order` 出厂为空，表示**未配置**，本条进 skipped。
+      依据说明：**项目应当经过哪些环节、以什么顺序经过，由各单位项目管理办法规定**，
+      政府投资项目与企业投资项目的环节划分差别很大（是否含可研批复、是否含初设评审、是否含开工报告等），
+      本插件**不硬编码任何环节清单**。
+      配置示例：order: [立项, 可行性研究, 初步设计, 概算, 招标, 合同, 开工, 变更, 结算, 决算]。
+      本条只核对**台账里出现的环节是否符合配置顺序**（允许跳过环节），
+      **不判断跳过是否合规**——那需要看该项目实际应当经过哪些环节。
+
+  - id: PC-004
+    title: 批复、签署与生效日期应可解析且先后成立
+    severity: warn
+    basis:
+      document: 本机构项目管理办法与投资管理制度（无国家标准）
+      number: 无统一标准（本条依据为日期自洽）
+      clause: 不属于标准条款（本条为日期核对）
+      excerpt: 本条依据为日期先后自洽，不存在可引用的标准条文；本规则库不伪造引文。
+      kind: derived-from-principle
+      source: https://www.gov.cn/
+    params:
+      check:
+        kind: date
+        field: signedAt
+        notBeforeField: approvedAt
+        fix: 签署日期不应早于批复日期；核对两个日期的填写
+    note: >-
+      "先批复、后签署"是项目流程的**时间前提**；日期可解析是台账能被程序处理的前提。
+      **本条没有标准条文可引**，故按功能前提判定并封顶 warn。
+      本条只比较两个日期（同一天视为不晚于），**不判断签署是否越权、批复是否有效**。
+      日期无法解析时会单独报出，**不会静默跳过**。
+      生效日期与签署日期的先后，把 field 改为 signedAt、notBeforeField 改为 effectiveAt 再加一条即可。
+
+  - id: PC-005
+    title: 同一环节的文件编号不应重复登记
+    severity: warn
+    basis:
+      document: 本机构项目管理办法与投资管理制度（无国家标准）
+      number: 无统一标准（本条依据为台账唯一性）
+      clause: 不属于标准条款（本条为台账唯一性核对）
+      excerpt: 本条依据为台账唯一性要求，不存在可引用的标准条文；本规则库不伪造引文。
+      kind: derived-from-principle
+      source: https://www.gov.cn/
+    params:
+      check:
+        kind: unique
+        field: docNo
+    note: >-
+      同一份文件的编号在台账里出现两次，会让人无法判断是重复登记还是两份文件被错编成同一号，
+      金额累计也会因此重复计算。**本条没有标准条文可引**，故按可核对性判定并封顶 warn。
+      比较时忽略空白字符。命中需人工确认。
+
+  - id: PC-006
+    title: 金额栏应为可解析的数值
+    severity: warn
+    basis:
+      document: 本机构项目管理办法与投资管理制度（无国家标准）
+      number: 无统一标准（本条依据为金额可比性）
+      clause: 不属于标准条款（本条为数值可解析性核对）
+      excerpt: 本条依据为金额可汇总可比的要求，不存在可引用的标准条文；本规则库不伪造引文。
+      kind: derived-from-principle
+      source: https://www.gov.cn/
+    params:
+      check:
+        kind: number
+        field: amount
+        fix: 金额应填写数字（可带千分位与单位）；本条只核对可解析性，不判断金额是否超概
+    note: >-
+      金额只有可解析，链条上的累计与比对才做得了。**本条没有标准条文可引**，
+      故按可比性这一功能前提判定并封顶 warn。
+      本条**只核对能否解析为数值**（接受 `1,200.50`、`1200万元` 这类写法），
+      **绝不判断金额是否超过概算、是否应当审批**——那需要概算口径与审批权限，是投资管理部门的判断。
+
+  - id: PC-007
+    title: 台账文件名称不应残留未替换的占位符
+    severity: warn
+    basis:
+      document: 本机构项目管理办法与投资管理制度（无国家标准）
+      number: 无统一标准（本条依据为台账真实性）
+      clause: 不属于标准条款（本条为台账真实性核对）
+      excerpt: 本条依据为台账内容真实性要求，不存在可引用的标准条文；本规则库不伪造引文。
+      kind: derived-from-principle
+      source: https://www.gov.cn/
+    params:
+      check:
+        kind: containsAny
+        field: document
+        terms: ['【', '】', '{{', '}}', 'XXX', 'xxx', '待填', '待补充', 'TBD', 'todo', '示例']
+        fix: 文件名称应填写实际内容；残留占位符说明台账是照模板抄的
+    note: >-
+      台账若直接照抄模板，文件名称栏留下【】、XXX、待填、TBD 之类占位符时，
+      会让人误以为该环节已经办结——**这是台账类工具最危险的失效方式**。
+      **本条没有标准条文可引**，故封顶 warn。terms 可按本机构模板调整。
+
+  - id: PC-008
+    title: 环节序号不应在台账内重复
+    severity: warn
+    basis:
+      document: 本机构项目管理办法与投资管理制度（无国家标准）
+      number: 无统一标准（本条依据为台账唯一性）
+      clause: 不属于标准条款（本条为台账唯一性核对）
+      excerpt: 本条依据为台账唯一性要求，不存在可引用的标准条文；本规则库不伪造引文。
+      kind: derived-from-principle
+      source: https://www.gov.cn/
+    params:
+      check:
+        kind: unique
+        field: stageNo
+    note: >-
+      环节序号唯一是"每个环节只被登记一次"的**前提条件**。
+      **本条没有标准条文可引**，故按可核对性判定并封顶 warn。比较时忽略空白字符。
+      命中通常意味着重复登记或序号抄错，需人工确认。
+      注意：同一环节在台账中出现多行是正常的（例如多次变更），此时应使用不同的序号。
+
+disabled: []
