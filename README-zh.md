@@ -42,8 +42,7 @@ accountable. **Those depend on the institution's investment rules and approval l
 ## Install
 
 ```sh
-pnpm pack
-dsh plugin --profile <name> add ./*.tgz
+dsh plugin --profile <name> add dsh-pipeline-check
 dsh --profile <name> --dump-config | grep 'dsh-pipeline-check'
 ```
 
