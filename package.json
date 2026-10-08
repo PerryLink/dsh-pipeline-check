@@ -1,6 +1,6 @@
 {
   "name": "dsh-pipeline-check",
-  "version": "0.2.1",
+  "version": "0.2.2",
   "description": "项目全流程文件链条核对（按环节先后与金额口径核对链条自洽，仅提示差异，不作出定性结论）",
   "type": "module",
   "main": "lib/index.mjs",
