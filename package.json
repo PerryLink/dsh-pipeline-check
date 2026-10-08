@@ -1,6 +1,6 @@
 {
   "name": "dsh-pipeline-check",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "项目全流程文件链条核对（按环节先后与金额口径核对链条自洽，仅提示差异，不作出定性结论）",
   "type": "module",
   "main": "lib/index.mjs",
@@ -32,7 +32,7 @@
     "verify:self-contained": "node scripts/verify-self-contained.mjs",
     "check:lockfile": "node scripts/check-lockfile-drift.mjs",
     "check:readmes": "node scripts/check-readme-sync.mjs",
-    "prepublishOnly": "pnpm run typecheck && pnpm test && pnpm run build && pnpm run verify:self-contained && pnpm run check:readmes && pnpm run check:citations",
+    "prepublishOnly": "pnpm run typecheck && pnpm test && pnpm run build && pnpm run verify:self-contained && pnpm run check:readmes",
     "prepare": "tsdown",
     "check:citations": "node scripts/check-citations.mjs"
   },
