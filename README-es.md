@@ -1,4 +1,29 @@
-# dsh-pipeline-check
+# dsh-pipeline-check — Verificación del registro de la cadena documental de todo el proceso de un proyecto
+
+`dsh-pipeline-check` lee un registro de la cadena documental de todo el proceso de un proyecto —la cabecera del proyecto más una fila por documento de etapa— y comprueba la completitud y la coherencia interna de ese registro: que el proyecto esté identificado, que cada fila nombre su etapa o su documento, que las etapas sigan la secuencia que usted declara, que las fechas de aprobación y de firma se puedan analizar y respeten su orden, que los números de documento sean únicos, que los importes se analicen como números y que no quede ningún marcador de plantilla en el nombre de un documento.
+
+## Qué responde
+
+| Usted pregunta | Qué responde |
+|---|---|
+| La regla del orden de etapas informa `skipped` en una instalación nueva. ¿Hay algo roto? | No. `PC-003` compara las etapas del registro con la lista `order` del paquete de reglas, y esa lista viene vacía, es decir sin configurar, así que la regla se informa a sí misma en `skipped` en lugar de pasar en silencio. Rellene `order` con la secuencia de su institución (el ejemplo del paquete es 立项, 可行性研究, 初步设计, 概算, 招标, 合同, 开工, 变更, 结算, 决算) y entonces solo comprueba que las etapas que aparecen en el registro sigan ese orden, admitiéndose un salto; nunca juzga si saltarse una etapa era admisible, y su base deja constancia de que no existe cláusula citable, por lo que está limitada a `info`. |
+| La fecha de firma del registro es anterior a la de aprobación, ¿se detecta? | Sí. `PC-004` compara `signedAt` con `approvedAt`: ambas deben analizarse como fechas y la firma no debe ser anterior a la aprobación, y el mismo día cuenta como no posterior. Una fecha que no puede analizar se informa por separado en lugar de dejarse pasar. Solo compara esas dos fechas: no juzga si la firma excedió la autoridad ni si la aprobación era válida. |
+| Un importe figura como `1,200.50` o `1200万元`, ¿se lee igualmente? | Sí. `PC-006` acepta importes con separador de miles o con unidad e informa solo del importe que no puede analizar como número. Comprueba únicamente que sea analizable: si el importe rebasa el presupuesto o si requería aprobación no lo decide esta regla. |
+| Una fila no trae nombre de etapa ni nombre de documento. | `PC-002` exige al menos uno de los dos, `stage` o `document`, en cada fila, e informa de la fila que no trae ninguno. Comprueba que al menos uno esté relleno; no juzga si esa etapa debía tramitarse ni si los documentos de esa etapa están completos. |
+| El mismo número de documento aparece en dos filas. | `PC-005` informa de un `docNo` repetido e ignora los espacios en blanco al comparar, porque la repetición impide la deduplicación y hace que los importes se cuenten dos veces. No distingue un registro duplicado de dos documentos a los que se dio por error el mismo número, así que una coincidencia requiere confirmación humana. |
+| El nombre del documento aún dice `【待填】` o `TBD`. | `PC-007` informa de toda fila cuyo `document` contenga uno de los términos de plantilla del paquete: 【, 】, `{{`, `}}`, XXX, xxx, 待填, 待补充, TBD, todo, 示例; un registro copiado de una plantilla hace que una etapa no tramitada parezca resuelta. Solo se buscan los términos listados, y `terms` puede ajustarse a su plantilla. |
+
+## Normas que sigue
+
+| Documento | Número | Reglas que lo citan |
+|---|---|---|
+| 本机构项目管理办法与投资管理制度（无国家标准） | 无统一标准（本条依据为台账可追溯性） | PC-001 |
+| 本机构项目管理办法与投资管理制度（无国家标准） | 无统一标准（本条依据为链条齐备性） | PC-002 |
+| 本机构项目管理办法与投资管理制度（无国家标准） | 无统一标准（本条依据为本机构配置的环节顺序表） | PC-003 |
+| 本机构项目管理办法与投资管理制度（无国家标准） | 无统一标准（本条依据为日期自洽） | PC-004 |
+| 本机构项目管理办法与投资管理制度（无国家标准） | 无统一标准（本条依据为台账唯一性） | PC-005, PC-008 |
+| 本机构项目管理办法与投资管理制度（无国家标准） | 无统一标准（本条依据为金额可比性） | PC-006 |
+| 本机构项目管理办法与投资管理制度（无国家标准） | 无统一标准（本条依据为台账真实性） | PC-007 |
 
 **Boundary:** this plugin checks a **项目全流程文件链条台账** for what a register can be held to — that the
 project is identified, that each row names its stage or document, that the stages follow the sequence you

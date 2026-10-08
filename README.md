@@ -1,4 +1,29 @@
-# dsh-pipeline-check
+# dsh-pipeline-check — Project whole-process document chain register check
+
+`dsh-pipeline-check` reads one project whole-process document chain register — the project header plus one row per stage document — and checks that register's own completeness and internal consistency: that the project is identified, that each row names its stage or its document, that the stages follow the sequence you declare, that approval and signing dates parse and follow each other, that document numbers are unique, that amounts parse as numbers, and that no template placeholder survives in a document name.
+
+## What it answers
+
+| You ask | What it answers |
+|---|---|
+| The stage-order rule reports `skipped` on a fresh install. Is something broken? | No. `PC-003` compares the register's stages against the `order` list in the rule pack, and that list ships empty, meaning unconfigured, so the rule reports itself in `skipped` instead of passing silently. Fill `order` with your institution's own sequence (the pack's example is 立项, 可行性研究, 初步设计, 概算, 招标, 合同, 开工, 变更, 结算, 决算) and it then checks only that the stages appearing in the register follow that order, a gap being allowed; it never judges whether skipping a stage was permissible, and its basis records that no citable clause exists, so it is capped at `info`. |
+| The signing date in the register is earlier than the approval date — is that caught? | Yes. `PC-004` compares `signedAt` with `approvedAt`: both must parse as dates and the signing date must not fall before the approval date, the same day counting as not later. A date it cannot parse is reported on its own rather than passed over in silence. It compares those two dates only — it does not judge whether the signing exceeded authority or whether the approval itself was valid. |
+| An amount is written as `1,200.50` or `1200万元`. Will it still be read? | Yes. `PC-006` accepts amounts carrying thousands separators or a unit and reports only an amount it cannot parse as a number. It checks parseability alone: whether the amount breaches the estimate, or whether it needed approval, is not something this rule decides. |
+| A row carries neither a stage name nor a document name. | `PC-002` requires at least one of `stage` or `document` on every row and reports the row that has neither. It checks that at least one of them is filled; whether that stage should have been handled at all, and whether the documents for it are complete, are not judged. |
+| The same document number appears on two rows. | `PC-005` reports a repeated `docNo`, ignoring whitespace when it compares, because a repeat defeats de-duplication and double-counts the amounts. It cannot tell a duplicate registration from two documents wrongly given one number, so a hit needs human confirmation. |
+| The document name still reads `【待填】` or `TBD`. | `PC-007` reports any row whose `document` contains one of the pack's template terms — 【, 】, `{{`, `}}`, XXX, xxx, 待填, 待补充, TBD, todo, 示例 — because a register copied from a template makes an unhandled stage look settled. Only the listed terms are searched, and `terms` can be adjusted to your own template. |
+
+## Standards it follows
+
+| Document | Number | Cited by rules |
+|---|---|---|
+| 本机构项目管理办法与投资管理制度（无国家标准） | 无统一标准（本条依据为台账可追溯性） | PC-001 |
+| 本机构项目管理办法与投资管理制度（无国家标准） | 无统一标准（本条依据为链条齐备性） | PC-002 |
+| 本机构项目管理办法与投资管理制度（无国家标准） | 无统一标准（本条依据为本机构配置的环节顺序表） | PC-003 |
+| 本机构项目管理办法与投资管理制度（无国家标准） | 无统一标准（本条依据为日期自洽） | PC-004 |
+| 本机构项目管理办法与投资管理制度（无国家标准） | 无统一标准（本条依据为台账唯一性） | PC-005, PC-008 |
+| 本机构项目管理办法与投资管理制度（无国家标准） | 无统一标准（本条依据为金额可比性） | PC-006 |
+| 本机构项目管理办法与投资管理制度（无国家标准） | 无统一标准（本条依据为台账真实性） | PC-007 |
 
 **Boundary:** this plugin checks a **项目全流程文件链条台账** for what a register can be held to — that the
 project is identified, that each row names its stage or document, that the stages follow the sequence you
