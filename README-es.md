@@ -1,6 +1,14 @@
 # dsh-pipeline-check — Verificación del registro de la cadena documental de todo el proceso de un proyecto
 
+[![DSH Market](https://raw.githubusercontent.com/2BingLing/dsh-market/master/assets/readme/badge-listed-en.svg)](https://dsh.market/)
+
 `dsh-pipeline-check` lee un registro de la cadena documental de todo el proceso de un proyecto —la cabecera del proyecto más una fila por documento de etapa— y comprueba la completitud y la coherencia interna de ese registro: que el proyecto esté identificado, que cada fila nombre su etapa o su documento, que las etapas sigan la secuencia que usted declara, que las fechas de aprobación y de firma se puedan analizar y respeten su orden, que los números de documento sean únicos, que los importes se analicen como números y que no quede ningún marcador de plantilla en el nombre de un documento.
+
+## Cómo se ve la salida
+
+![Terminal demo of dsh-pipeline-check: real output over its PC-001 fixture](https://raw.githubusercontent.com/PerryLink/dsh-pipeline-check/main/docs/assets/dsh-pipeline-check-demo.png)
+
+Salida real de este plugin sobre su propio fixture de prueba `PC-001` — no es un montaje. El paquete de reglas no inventa citas, así que cada hallazgo nombra la cláusula aplicada y advierte que su texto no se obtuvo.
 
 ## Qué responde
 
