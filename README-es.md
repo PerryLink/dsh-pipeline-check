@@ -4,6 +4,13 @@
 
 `dsh-pipeline-check` lee un registro de la cadena documental de todo el proceso de un proyecto —la cabecera del proyecto más una fila por documento de etapa— y comprueba la completitud y la coherencia interna de ese registro: que el proyecto esté identificado, que cada fila nombre su etapa o su documento, que las etapas sigan la secuencia que usted declara, que las fechas de aprobación y de firma se puedan analizar y respeten su orden, que los números de documento sean únicos, que los importes se analicen como números y que no quede ningún marcador de plantilla en el nombre de un documento.
 
+## Install
+
+```sh
+dsh plugin --profile <name> add dsh-pipeline-check
+dsh --profile <name> --dump-config | grep 'dsh-pipeline-check'
+```
+
 ## Cómo se ve la salida
 
 ![Terminal demo of dsh-pipeline-check: real output over its PC-001 fixture](https://raw.githubusercontent.com/PerryLink/dsh-pipeline-check/main/docs/assets/dsh-pipeline-check-hero.png)
@@ -73,13 +80,6 @@ accountable. **Those depend on the institution's investment rules and approval l
 ## What it does
 
 La tabla de reglas, los campos y el comportamiento detallado están en [README.md](README.md#what-it-does) (versión principal en inglés). El plugin sólo enumera divergencias literales frente a las cláusulas citadas e indica en `skipped` cada comprobación que no pudo ejecutarse.
-
-## Install
-
-```sh
-dsh plugin --profile <name> add dsh-pipeline-check
-dsh --profile <name> --dump-config | grep 'dsh-pipeline-check'
-```
 
 ## Configuration
 

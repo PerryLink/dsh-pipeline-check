@@ -4,6 +4,13 @@
 
 `dsh-pipeline-check` reads one project whole-process document chain register — the project header plus one row per stage document — and checks that register's own completeness and internal consistency: that the project is identified, that each row names its stage or its document, that the stages follow the sequence you declare, that approval and signing dates parse and follow each other, that document numbers are unique, that amounts parse as numbers, and that no template placeholder survives in a document name.
 
+## Install
+
+```sh
+dsh plugin --profile <name> add dsh-pipeline-check
+dsh --profile <name> --dump-config | grep 'dsh-pipeline-check'
+```
+
 ## What it looks like
 
 ![Terminal demo of dsh-pipeline-check: real output over its PC-001 fixture](https://raw.githubusercontent.com/PerryLink/dsh-pipeline-check/main/docs/assets/dsh-pipeline-check-hero.png)
@@ -85,13 +92,6 @@ stage document — applies a versioned rule pack, and returns a report.
 | `PC-006` | amounts parse as numbers | warn | comparability |
 | `PC-007` | document names hold no unreplaced placeholder | warn | register integrity |
 | `PC-008` | stage numbers are unique | warn | register uniqueness |
-
-## Install
-
-```sh
-dsh plugin --profile <name> add dsh-pipeline-check
-dsh --profile <name> --dump-config | grep 'dsh-pipeline-check'
-```
 
 ## Configuration
 

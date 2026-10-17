@@ -4,6 +4,13 @@
 
 `dsh-pipeline-check` 读取一份项目全流程文件链条台账——表头加每个环节文件一行——核对这份台账自身的齐备与自洽：是否写明项目、每行是否填写环节或文件、环节是否按你配置的顺序出现、批复与签署日期是否可解析且先后成立、文件编号是否唯一、金额是否可解析为数值、文件名称栏是否残留模板占位符。
 
+## Install
+
+```sh
+dsh plugin --profile <name> add dsh-pipeline-check
+dsh --profile <name> --dump-config | grep 'dsh-pipeline-check'
+```
+
 ## 实际输出长什么样
 
 ![Terminal demo of dsh-pipeline-check: real output over its PC-001 fixture](https://raw.githubusercontent.com/PerryLink/dsh-pipeline-check/main/docs/assets/dsh-pipeline-check-hero.png)
@@ -73,13 +80,6 @@ accountable. **Those depend on the institution's investment rules and approval l
 ## What it does
 
 规则表、字段说明与行为细节见 [README.md](README.md#what-it-does)（英文主版本）。本插件只列出材料与所引条款之间的字面差异，并对无法执行的检查在 `skipped` 中逐项说明。
-
-## Install
-
-```sh
-dsh plugin --profile <name> add dsh-pipeline-check
-dsh --profile <name> --dump-config | grep 'dsh-pipeline-check'
-```
 
 ## Configuration
 
