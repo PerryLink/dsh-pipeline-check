@@ -6,7 +6,9 @@
 
 ## Como é a saída
 
-![Terminal demo of dsh-pipeline-check: real output over its PC-001 fixture](https://raw.githubusercontent.com/PerryLink/dsh-pipeline-check/main/docs/assets/dsh-pipeline-check-demo.png)
+![Terminal demo of dsh-pipeline-check: real output over its PC-001 fixture](https://raw.githubusercontent.com/PerryLink/dsh-pipeline-check/main/docs/assets/dsh-pipeline-check-hero.png)
+
+![Animated terminal demo of dsh-pipeline-check](https://raw.githubusercontent.com/PerryLink/dsh-pipeline-check/main/docs/assets/dsh-pipeline-check-demo.gif)
 
 Saída real deste plugin sobre o seu próprio fixture de teste `PC-001` — não é uma simulação. O pacote de regras não inventa citações, por isso cada achado nomeia a cláusula aplicada e avisa que o seu texto não foi obtido.
 

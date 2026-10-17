@@ -1,0 +1,14 @@
+[
+  {
+    "path": "docs/assets/dsh-pipeline-check-hero.png",
+    "kind": "hero",
+    "alt": "dsh-pipeline-check terminal output",
+    "caption": "Real dsh-pipeline-check checker output; 31 tests passed."
+  },
+  {
+    "path": "docs/assets/dsh-pipeline-check-demo.gif",
+    "kind": "demo",
+    "alt": "Animated dsh-pipeline-check terminal session",
+    "caption": "The same run, assembled line by line."
+  }
+]

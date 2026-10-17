@@ -6,7 +6,9 @@
 
 ## What it looks like
 
-![Terminal demo of dsh-pipeline-check: real output over its PC-001 fixture](https://raw.githubusercontent.com/PerryLink/dsh-pipeline-check/main/docs/assets/dsh-pipeline-check-demo.png)
+![Terminal demo of dsh-pipeline-check: real output over its PC-001 fixture](https://raw.githubusercontent.com/PerryLink/dsh-pipeline-check/main/docs/assets/dsh-pipeline-check-hero.png)
+
+![Animated terminal demo of dsh-pipeline-check](https://raw.githubusercontent.com/PerryLink/dsh-pipeline-check/main/docs/assets/dsh-pipeline-check-demo.gif)
 
 Real output from this plugin over its own `PC-001` test fixture — not a mock-up. The rule pack ships no invented quotations, so a finding names both the clause it applied and the fact that the clause text was not obtained.
 
