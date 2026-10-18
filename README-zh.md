@@ -44,12 +44,7 @@ dsh --profile <name> --dump-config | grep 'dsh-pipeline-check'
 | 本机构项目管理办法与投资管理制度（无国家标准） | 无统一标准（本条依据为金额可比性） | PC-006 |
 | 本机构项目管理办法与投资管理制度（无国家标准） | 无统一标准（本条依据为台账真实性） | PC-007 |
 
-**Boundary:** this plugin checks a **项目全流程文件链条台账** for what a register can be held to — that the
-project is identified, that each row names its stage or document, that the stages follow the sequence you
-declare, that approval and signing dates parse and follow each other, that document numbers are unique, that
-amounts parse, and that no template placeholder survives. It does **not** decide whether a project is
-compliant, whether an approval exceeded authority, whether spending breached the estimate, or who is
-accountable. **Those depend on the institution's investment rules and approval limits.**
+**边界（中文译文，以英文原文为准）：** 本插件核对一份 **项目全流程文件链条台账** 在台账层面可以要求到的内容——是否写明项目，每行是否填写环节或文件，环节是否按你声明的顺序出现，批复与签署日期是否可解析且先后成立，文件编号是否唯一，金额是否可解析，以及是否残留模板占位符。它**不**判定项目是否合规、批复是否越权、支出是否超出概算，或应由谁负责。**这些取决于本机构的投资制度与审批权限。**
 
 > ### ⚠️ There is no national standard for this, and the pack does not pretend otherwise
 >
