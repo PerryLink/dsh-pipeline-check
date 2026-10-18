@@ -46,24 +46,17 @@ dsh --profile <name> --dump-config | grep 'dsh-pipeline-check'
 
 **边界（中文译文，以英文原文为准）：** 本插件核对一份 **项目全流程文件链条台账** 在台账层面可以要求到的内容——是否写明项目，每行是否填写环节或文件，环节是否按你声明的顺序出现，批复与签署日期是否可解析且先后成立，文件编号是否唯一，金额是否可解析，以及是否残留模板占位符。它**不**判定项目是否合规、批复是否越权、支出是否超出概算，或应由谁负责。**这些取决于本机构的投资制度与审批权限。**
 
-> ### ⚠️ There is no national standard for this, and the pack does not pretend otherwise
+> ### ⚠️ 此事没有国家标准，本规则库也不假装有（以英文原文为准）
 >
-> **Which stages a project passes through, and in what order, is set by each institution's project and
-> investment rules** — and it differs sharply between industries (power, municipal, building, water) and
-> between government-funded and enterprise-funded projects. **No unified national standard exists**, so this
-> pack does not fabricate a standard number: every rule's `excerpt` states plainly that its basis is chain
-> self-consistency or traceability and that **no citable clause exists**. A test asserts that every excerpt
-> carries such an admission.
+> **项目经过哪些环节、顺序如何，由各机构的项目与投资制度设定**——而且行业之间（电力、市政、建筑、水利）、政府投资项目与企业投资项目之间差异很大。**并不存在统一的国家标准**，因此本规则库不会伪造一个标准号：每条规则的 `excerpt` 都明确写出，其依据是链条自洽或可追溯性，并且**不存在可引用的条款**。有一项测试断言每条 excerpt 都带有这类声明。
 >
-> **The plugin ships no stage list.** `PC-003`'s `stageOrder` ships **empty**, and with nothing configured it
-> reports itself in `skipped` rather than inventing a stage sequence. Configure it like this:
+> **本插件不附带环节清单。** `PC-003` 的 `stageOrder` 出厂为**空**，在未配置任何内容时，它会把自己记入 `skipped`，而不是编造一个环节顺序。配置方式如下：
 >
 > ```yaml
 > order: [立项, 可行性研究, 初步设计, 概算, 招标, 合同, 开工, 变更, 结算, 决算]
 > ```
 >
-> The check then verifies that the stages appearing in the register are **in** that order, skipping stages the
-> project legitimately did not pass through; it never judges whether a skip was permissible.
+> 此后的核对会确认台账中出现的环节是否**按**该顺序出现，并跳过项目确实没有经过的环节；它从不判断跳过是否被允许。
 
 ## Compatibility
 
