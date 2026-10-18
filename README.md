@@ -1,5 +1,7 @@
 # dsh-pipeline-check — Project whole-process document chain register check
 
+[English](README.md) · [简体中文](README-zh.md) · [Español](README-es.md) · [Português](README-pt.md) · [हिन्दी](README-hi.md)
+
 [![DSH Market](https://raw.githubusercontent.com/2BingLing/dsh-market/master/assets/readme/badge-listed-en.svg)](https://dsh.market/)
 
 `dsh-pipeline-check` reads one project whole-process document chain register — the project header plus one row per stage document — and checks that register's own completeness and internal consistency: that the project is identified, that each row names its stage or its document, that the stages follow the sequence you declare, that approval and signing dates parse and follow each other, that document numbers are unique, that amounts parse as numbers, and that no template placeholder survives in a document name.
