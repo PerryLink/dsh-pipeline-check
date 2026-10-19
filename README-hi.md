@@ -3,6 +3,7 @@
 [English](README.md) · [简体中文](README-zh.md) · [Español](README-es.md) · [Português](README-pt.md) · [हिन्दी](README-hi.md)
 
 [![DSH Market](https://raw.githubusercontent.com/2BingLing/dsh-market/master/assets/readme/badge-listed-en.svg)](https://dsh.market/)
+[![dshfind](https://dshfind.com/api/badge/PerryLink/dsh-pipeline-check?metric=downloads)](https://dshfind.com/en/plugins/PerryLink/dsh-pipeline-check?ref=badge)
 
 `dsh-pipeline-check` परियोजना की संपूर्ण प्रक्रिया की दस्तावेज़ शृंखला का एक रजिस्टर पढ़ता है — परियोजना हेडर और प्रत्येक चरण-दस्तावेज़ की एक पंक्ति — और उसी रजिस्टर की पूर्णता तथा आंतरिक सुसंगति की जाँच करता है: क्या परियोजना अंकित है, क्या हर पंक्ति अपना चरण या दस्तावेज़ बताती है, क्या चरण आपके घोषित क्रम में आते हैं, क्या अनुमोदन और हस्ताक्षर की तिथियाँ पढ़ी जा सकती हैं और उनका क्रम बनता है, क्या दस्तावेज़ क्रमांक अद्वितीय हैं, क्या राशियाँ संख्या के रूप में पढ़ी जा सकती हैं, और क्या किसी दस्तावेज़ के नाम में टेम्पलेट प्लेसहोल्डर शेष नहीं है।
 

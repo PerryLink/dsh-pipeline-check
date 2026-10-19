@@ -3,6 +3,7 @@
 [English](README.md) · [简体中文](README-zh.md) · [Español](README-es.md) · [Português](README-pt.md) · [हिन्दी](README-hi.md)
 
 [![DSH Market](https://raw.githubusercontent.com/2BingLing/dsh-market/master/assets/readme/badge-listed-en.svg)](https://dsh.market/)
+[![dshfind](https://dshfind.com/api/badge/PerryLink/dsh-pipeline-check?metric=downloads)](https://dshfind.com/en/plugins/PerryLink/dsh-pipeline-check?ref=badge)
 
 `dsh-pipeline-check` lê um registo da cadeia documental de todo o processo de um projeto —o cabeçalho do projeto mais uma linha por documento de etapa— e verifica a completude e a coerência interna desse registo: se o projeto está identificado, se cada linha nomeia a sua etapa ou o seu documento, se as etapas seguem a sequência que declara, se as datas de aprovação e de assinatura são analisáveis e respeitam a ordem, se os números de documento são únicos, se os montantes são analisáveis como números e se não resta nenhum marcador de modelo no nome de um documento.
 
