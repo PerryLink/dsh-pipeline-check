@@ -30,6 +30,35 @@ dsh --profile <name> --dump-config | grep 'dsh-pipeline-check'
 下表是示例集：第一行是详细走查，其余行是简短案例。
 
 
+#### 详细输出
+
+**工具** `pipeline_check`
+
+**输入**
+
+~~~json
+{"project":"某某技改项目","projectNo":"XM-2026-018","rows":[{"序号":"1","环节":"","文件名称":"","文件编号":"LX-2026-001"}]}
+~~~
+ 
+**输出**
+
+~~~json
+{
+  "id": "dsh-pipeline-check.PC-002.de09b5a6",
+  "ruleId": "PC-002",
+  "severity": "warn",
+  "locator": {
+    "row": 1,
+    "field": "stage"
+  },
+  "found": "第 1 行 stage、document 都为空",
+  "expected": "stage、document 至少应填写一项",
+  "fix": "补填环节名称与文件名称；本条只核对是否填写，不判断该环节是否应当办理"
+}
+~~~
+
+*来源 `dsh-pipeline-check/tests/fixtures/PC-002/PC-002-unsafe.json (cases.json expects 1×PC-002); executed parseMaterial+runCheck, checkedAt=2026-10-06T00:00:00.000Z`*
+
 | 你会问 | 它怎么答 |
 |---|---|
 | 新装上台账后，环节顺序那条规则报的是 `skipped`，是坏了吗？ | 不是。`PC-003` 拿台账里的环节与规则库的 `order` 清单比对，而这份清单出厂为空、即未配置，因此本条报告自己进入 `skipped`，而不是静默通过。把本单位的环节顺序填进 `order`（规则库的示例是 立项、可行性研究、初步设计、概算、招标、合同、开工、变更、结算、决算），它就只核对台账里出现的环节是否按这个顺序出现、允许中间跳过；跳过是否合规它不判断，其依据也写明没有可引条文，故封顶 `info`。 |

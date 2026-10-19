@@ -28,6 +28,35 @@ dsh --profile <name> --dump-config | grep 'dsh-pipeline-check'
 
 The table below is the example set: the first row is the detailed walkthrough, the remaining rows are short cases.
 
+#### Detailed output
+
+**Tool** `pipeline_check`
+
+**Input**
+
+~~~json
+{"project":"某某技改项目","projectNo":"XM-2026-018","rows":[{"序号":"1","环节":"","文件名称":"","文件编号":"LX-2026-001"}]}
+~~~
+ 
+**Output**
+
+~~~json
+{
+  "id": "dsh-pipeline-check.PC-002.de09b5a6",
+  "ruleId": "PC-002",
+  "severity": "warn",
+  "locator": {
+    "row": 1,
+    "field": "stage"
+  },
+  "found": "第 1 行 stage、document 都为空",
+  "expected": "stage、document 至少应填写一项",
+  "fix": "补填环节名称与文件名称；本条只核对是否填写，不判断该环节是否应当办理"
+}
+~~~
+
+*Observed from `dsh-pipeline-check/tests/fixtures/PC-002/PC-002-unsafe.json (cases.json expects 1×PC-002); executed parseMaterial+runCheck, checkedAt=2026-10-06T00:00:00.000Z`*
+
 | You ask | What it answers |
 |---|---|
 | The stage-order rule reports `skipped` on a fresh install. Is something broken? | No. `PC-003` compares the register's stages against the `order` list in the rule pack, and that list ships empty, meaning unconfigured, so the rule reports itself in `skipped` instead of passing silently. Fill `order` with your institution's own sequence (the pack's example is 立项, 可行性研究, 初步设计, 概算, 招标, 合同, 开工, 变更, 结算, 决算) and it then checks only that the stages appearing in the register follow that order, a gap being allowed; it never judges whether skipping a stage was permissible, and its basis records that no citable clause exists, so it is capped at `info`. |

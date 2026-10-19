@@ -30,6 +30,35 @@ Salida real de este plugin sobre su propio fixture de prueba `PC-001` — no es 
 La tabla siguiente es el conjunto de ejemplos: la primera fila es el caso detallado y las demás son casos breves.
 
 
+#### Salida detallada
+
+**Herramienta** `pipeline_check`
+
+**Entrada**
+
+~~~json
+{"project":"某某技改项目","projectNo":"XM-2026-018","rows":[{"序号":"1","环节":"","文件名称":"","文件编号":"LX-2026-001"}]}
+~~~
+ 
+**Salida**
+
+~~~json
+{
+  "id": "dsh-pipeline-check.PC-002.de09b5a6",
+  "ruleId": "PC-002",
+  "severity": "warn",
+  "locator": {
+    "row": 1,
+    "field": "stage"
+  },
+  "found": "第 1 行 stage、document 都为空",
+  "expected": "stage、document 至少应填写一项",
+  "fix": "补填环节名称与文件名称；本条只核对是否填写，不判断该环节是否应当办理"
+}
+~~~
+
+*Observado en `dsh-pipeline-check/tests/fixtures/PC-002/PC-002-unsafe.json (cases.json expects 1×PC-002); executed parseMaterial+runCheck, checkedAt=2026-10-06T00:00:00.000Z`*
+
 | Usted pregunta | Qué responde |
 |---|---|
 | La regla del orden de etapas informa `skipped` en una instalación nueva. ¿Hay algo roto? | No. `PC-003` compara las etapas del registro con la lista `order` del paquete de reglas, y esa lista viene vacía, es decir sin configurar, así que la regla se informa a sí misma en `skipped` en lugar de pasar en silencio. Rellene `order` con la secuencia de su institución (el ejemplo del paquete es 立项, 可行性研究, 初步设计, 概算, 招标, 合同, 开工, 变更, 结算, 决算) y entonces solo comprueba que las etapas que aparecen en el registro sigan ese orden, admitiéndose un salto; nunca juzga si saltarse una etapa era admisible, y su base deja constancia de que no existe cláusula citable, por lo que está limitada a `info`. |
