@@ -1,6 +1,6 @@
 # dsh-pipeline-check — 项目全流程文件链条核对
 
-## 快速试跑（1 分钟）
+### 快速试跑（1 分钟）
 
 ```bash
 node samples/quickstart/run.mjs --check
