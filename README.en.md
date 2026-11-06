@@ -1,8 +1,8 @@
 <div align="center">
 
 <picture>
-  <source media="(prefers-color-scheme: dark)" srcset="docs/assets/dsh-pipeline-check-flow-dark.svg">
-  <img src="docs/assets/dsh-pipeline-check-flow-light.svg" width="100%" alt="dsh-pipeline-check workflow: material → parseMaterial → rulesFile (PC-001 to PC-008) → runCheck → report with findings and skipped entries">
+  <source media="(prefers-color-scheme: dark)" srcset="docs/assets/dsh-pipeline-check-hero-en-dark.webp">
+  <img src="docs/assets/dsh-pipeline-check-hero-en-light.webp" width="100%" alt="dsh-pipeline-check: the plugin name and its value lines on the left; on the right a project whole-process file-chain ledger whose tendering link repeats the initiation document number, whose contract link is signed before approval, and whose change link holds an unparsable amount and a template placeholder — below it the PC-004 and PC-005 finding cards and the report line, with differences and un-run checks listed apart and the verdict kept for the reviewer">
 </picture>
 
 # dsh-pipeline-check
@@ -39,6 +39,11 @@ dsh plugin --profile <name> add dsh-pipeline-check
 `dsh-pipeline-check` reads one project whole-process document chain register — the project header plus one row per stage document — and checks that register's own completeness and internal consistency: that the project is identified, that each row names its stage or document, that the stages follow the sequence you declare, that approval and signing dates parse and follow each other, that document numbers are unique, that amounts parse as numbers, and that no template placeholder survives in a document name.
 
 Material is JSON or YAML. The tool reads the `file` or `material` you pass and never modifies the original; Excel should be converted to JSON/YAML first, which can happen in chat too.
+
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="docs/assets/dsh-pipeline-check-flow-v5-dark.svg">
+  <img src="docs/assets/dsh-pipeline-check-flow-v5-light.svg" width="100%" alt="dsh-pipeline-check structure: the material and the rule pack feed parseMaterial → runCheck; the stage chain is read at four scopes — ledger level (PC-001), inside a row (PC-002/004/006/007), across rows (PC-005/008) and across the whole chain (PC-003); differences reach issues[] and un-run checks reach skipped[], and both channels go to the reviewer">
+</picture>
 
 ## Three-step setup
 
@@ -344,7 +349,7 @@ Layout:
 | `rules/evidence/` | the verification record for every citation |
 | `tests/` | vitest; every rule has a paired compliant/violating fixture |
 
-The bundled sample's result can be compared with `samples/quickstart/expected/result.json`; a screenshot is at [`docs/assets/quickstart.png`](docs/assets/quickstart.png). The README images are generated programmatically by [`scripts/gen-readme-assets.py`](scripts/gen-readme-assets.py) (Python + Pillow) and are safe to re-run; a no-UI plugin gets a light/dark SVG flow pair shared by all five languages.
+The bundled sample's result can be compared with `samples/quickstart/expected/result.json`; a screenshot is at [`docs/assets/quickstart.png`](docs/assets/quickstart.png). The README images are generated programmatically by [`scripts/gen-readme-assets.py`](scripts/gen-readme-assets.py) — the hero banner with Pillow, the structure diagram as hand-written SVG — and are safe to re-run; the READMEs reference the hero (zh/en, light and dark) and the flow-v5 structure diagram (light and dark, shared by all five languages), while the old single-skin flow and the demo images stay in `docs/assets/` for external links.
 
 ## Family & thanks
 

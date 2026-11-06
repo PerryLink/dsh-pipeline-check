@@ -1,8 +1,8 @@
 <div align="center">
 
 <picture>
-  <source media="(prefers-color-scheme: dark)" srcset="docs/assets/dsh-pipeline-check-flow-dark.svg">
-  <img src="docs/assets/dsh-pipeline-check-flow-light.svg" width="100%" alt="Fluxo do dsh-pipeline-check: material → parseMaterial → rulesFile (PC-001 a PC-008) → runCheck → relatório com achados e entradas skipped">
+  <source media="(prefers-color-scheme: dark)" srcset="docs/assets/dsh-pipeline-check-hero-en-dark.webp">
+  <img src="docs/assets/dsh-pipeline-check-hero-en-light.webp" width="100%" alt="dsh-pipeline-check: à esquerda o nome e as frases de valor; à direita, um registo da cadeia documental de todo o processo de um projeto cujas ligações de concurso repetem o número do documento de arranque, o contrato é assinado antes da aprovação e a alteração tem um montante não analisável e um marcador de modelo; abaixo, os cartões PC-004 e PC-005 e a linha do relatório, com as diferenças e as verificações não executadas separadas e o veredicto nas mãos do revisor">
 </picture>
 
 # dsh-pipeline-check
@@ -39,6 +39,11 @@ dsh plugin --profile <name> add dsh-pipeline-check
 O `dsh-pipeline-check` lê um registo da cadeia documental de todo o processo de um projeto — o cabeçalho do projeto mais uma linha por documento de etapa — e verifica a completude e a coerência interna desse registo: se o projeto está identificado, se cada linha nomeia a sua etapa ou o seu documento, se as etapas seguem a sequência que declara, se as datas de aprovação e de assinatura são analisáveis e respeitam a ordem, se os números de documento são únicos, se os montantes são analisáveis como números e se não resta nenhum marcador de modelo no nome de um documento.
 
 O material é JSON ou YAML. A ferramenta lê o `file` ou o `material` que passa e nunca modifica o original; o Excel deve ser convertido antes para JSON/YAML, o que também pode acontecer no chat.
+
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="docs/assets/dsh-pipeline-check-flow-v5-dark.svg">
+  <img src="docs/assets/dsh-pipeline-check-flow-v5-light.svg" width="100%" alt="Estrutura do dsh-pipeline-check: o material e o pacote de regras alimentam parseMaterial → runCheck; a cadeia de etapas é lida em quatro âmbitos — registo (PC-001), dentro de uma linha (PC-002/004/006/007), entre linhas (PC-005/008) e toda a cadeia (PC-003); as diferenças vão para issues[] e o que não foi executado para skipped[], e ambos os canais chegam ao revisor">
+</picture>
 
 ## Instalação em três passos
 
@@ -344,7 +349,7 @@ Estrutura:
 | `rules/evidence/` | o registo de verificação de cada citação |
 | `tests/` | vitest; cada regra tem um par de fixtures conforme/violador |
 
-O resultado do exemplo incluído pode ser comparado com `samples/quickstart/expected/result.json`; há uma captura em [`docs/assets/quickstart.png`](docs/assets/quickstart.png). As imagens do README são geradas programaticamente por [`scripts/gen-readme-assets.py`](scripts/gen-readme-assets.py) (Python + Pillow) e podem ser novamente executadas sem risco; um plugin sem UI recebe um par de SVG de fluxo claro/escuro partilhado pelos cinco idiomas.
+O resultado do exemplo incluído pode ser comparado com `samples/quickstart/expected/result.json`; há uma captura em [`docs/assets/quickstart.png`](docs/assets/quickstart.png). As imagens do README são geradas programaticamente por [`scripts/gen-readme-assets.py`](scripts/gen-readme-assets.py) — o banner hero com Pillow e o diagrama de estrutura como SVG escrito à mão — e podem ser novamente executadas sem risco; os README referenciam apenas o hero (zh/en, claro e escuro) e o diagrama de estrutura flow-v5 (claro e escuro, partilhado pelos cinco idiomas), enquanto o antigo fluxo de uma só pele e as imagens de demonstração ficam em `docs/assets/` para ligações externas.
 
 ## Família e agradecimentos
 

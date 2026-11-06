@@ -1,8 +1,8 @@
 <div align="center">
 
 <picture>
-  <source media="(prefers-color-scheme: dark)" srcset="docs/assets/dsh-pipeline-check-flow-dark.svg">
-  <img src="docs/assets/dsh-pipeline-check-flow-light.svg" width="100%" alt="dsh-pipeline-check कार्यप्रवाह: material → parseMaterial → rulesFile (PC-001 से PC-008) → runCheck → findings और skipped वाली रिपोर्ट">
+  <source media="(prefers-color-scheme: dark)" srcset="docs/assets/dsh-pipeline-check-hero-en-dark.webp">
+  <img src="docs/assets/dsh-pipeline-check-hero-en-light.webp" width="100%" alt="dsh-pipeline-check: बाईं ओर प्लगइन का नाम और मूल्य-पंक्तियाँ; दाईं ओर परियोजना की संपूर्ण प्रक्रिया की दस्तावेज़-शृंखला का रजिस्टर, जिसमें निविदा की कड़ी आरंभ दस्तावेज़ का क्रमांक दोहराती है, अनुबंध पर अनुमोदन से पहले हस्ताक्षर हैं, और परिवर्तन में अपठनीय राशि तथा टेम्पलेट प्लेसहोल्डर है; नीचे PC-004 और PC-005 कार्ड तथा रिपोर्ट पंक्ति — अंतर और न-चली जाँचें अलग, निर्णय समीक्षक के पास">
 </picture>
 
 # dsh-pipeline-check
@@ -39,6 +39,11 @@ dsh plugin --profile <name> add dsh-pipeline-check
 `dsh-pipeline-check` परियोजना की संपूर्ण प्रक्रिया की दस्तावेज़ शृंखला का एक रजिस्टर पढ़ता है — परियोजना हेडर और प्रत्येक चरण-दस्तावेज़ की एक पंक्ति — और उसी रजिस्टर की पूर्णता तथा आंतरिक सुसंगति की जाँच करता है: क्या परियोजना अंकित है, क्या हर पंक्ति अपना चरण या दस्तावेज़ बताती है, क्या चरण आपके घोषित क्रम में आते हैं, क्या अनुमोदन और हस्ताक्षर की तिथियाँ पढ़ी जा सकती हैं और उनका क्रम बनता है, क्या दस्तावेज़ क्रमांक अद्वितीय हैं, क्या राशियाँ संख्या के रूप में पढ़ी जा सकती हैं, और क्या किसी दस्तावेज़ के नाम में टेम्पलेट प्लेसहोल्डर शेष नहीं है।
 
 सामग्री JSON या YAML है। उपकरण आपके द्वारा दिए गए `file` या `material` को पढ़ता है और मूल को कभी नहीं बदलता; Excel को पहले JSON/YAML में बदलें — यह चैट में भी हो सकता है।
+
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="docs/assets/dsh-pipeline-check-flow-v5-dark.svg">
+  <img src="docs/assets/dsh-pipeline-check-flow-v5-light.svg" width="100%" alt="dsh-pipeline-check की संरचना: सामग्री और नियम-पैक parseMaterial → runCheck में जाते हैं; चरण-शृंखला चार स्तरों पर पढ़ी जाती है — रजिस्टर (PC-001), पंक्ति के भीतर (PC-002/004/006/007), पंक्तियों के बीच (PC-005/008) और पूरी शृंखला (PC-003); अंतर issues[] में और न-चली जाँचें skipped[] में जाती हैं, और दोनों चैनल समीक्षक तक पहुँचते हैं">
+</picture>
 
 ## तीन चरणों में शुरुआत
 
@@ -344,7 +349,7 @@ node samples/quickstart/run.mjs --check        # साथ दिया नम�
 | `rules/evidence/` | हर उद्धरण का सत्यापन रिकॉर्ड |
 | `tests/` | vitest; हर नियम के लिए अनुरूप/उल्लंघनकारी फ़िक्स्चर की जोड़ी |
 
-साथ दिए नमूने के परिणाम की तुलना `samples/quickstart/expected/result.json` से की जा सकती है; स्क्रीनशॉट [`docs/assets/quickstart.png`](docs/assets/quickstart.png) में है। README की छवियाँ [`scripts/gen-readme-assets.py`](scripts/gen-readme-assets.py) (Python + Pillow) से प्रोग्रामेटिक रूप में बनती हैं और सुरक्षित रूप से दोबारा चलाई जा सकती हैं; बिना UI वाले प्लगइन को पाँचों भाषाओं द्वारा साझा हल्का/गहरा SVG फ़्लो जोड़ा मिलता है।
+साथ दिए नमूने के परिणाम की तुलना `samples/quickstart/expected/result.json` से की जा सकती है; स्क्रीनशॉट [`docs/assets/quickstart.png`](docs/assets/quickstart.png) में है। README की छवियाँ [`scripts/gen-readme-assets.py`](scripts/gen-readme-assets.py) से प्रोग्रामेटिक रूप में बनती हैं — hero बैनर Pillow से और संरचना आरेख हाथ से लिखे SVG से — और सुरक्षित रूप से दोबारा चलाई जा सकती हैं; README केवल hero (zh/en, हल्का और गहरा) तथा flow-v5 संरचना आरेख (हल्का और गहरा, पाँचों भाषाओं द्वारा साझा) का संदर्भ देते हैं, जबकि पुराना एक-रूप फ़्लो और डेमो छवियाँ बाहरी लिंक के लिए `docs/assets/` में रहती हैं।
 
 ## परिवार और आभार
 

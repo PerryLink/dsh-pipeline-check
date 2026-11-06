@@ -1,8 +1,8 @@
 <div align="center">
 
 <picture>
-  <source media="(prefers-color-scheme: dark)" srcset="docs/assets/dsh-pipeline-check-flow-dark.svg">
-  <img src="docs/assets/dsh-pipeline-check-flow-light.svg" width="100%" alt="dsh-pipeline-check 工作流：material → parseMaterial → rulesFile（PC-001 至 PC-008）→ runCheck → report；输出 findings 与 skipped">
+  <source media="(prefers-color-scheme: dark)" srcset="docs/assets/dsh-pipeline-check-hero-zh-dark.webp">
+  <img src="docs/assets/dsh-pipeline-check-hero-zh-light.webp" width="100%" alt="dsh-pipeline-check 配图：左列是插件名与价值句；右侧是一份项目全流程文件链条台账——招标环的文件编号与立项环相同、合同环的签署日期早于批复日期、变更环金额待定且文件名称残留模板，下方是 PC-004 与 PC-005 两张差异卡与报告行：差异与未执行分开列，结论留给审核人">
 </picture>
 
 # dsh-pipeline-check
@@ -39,6 +39,11 @@ dsh plugin --profile <name> add dsh-pipeline-check
 `dsh-pipeline-check` 读取一份项目全流程文件链条台账——项目表头加每个环节文件一行——核对这份台账自身的齐备与自洽：是否写明项目、每行是否填写环节或文件、环节是否按你配置的顺序出现、批复与签署日期是否可解析且先后成立、文件编号是否唯一、金额是否可解析为数值、文件名称栏是否残留模板占位符。
 
 材料是 JSON 或 YAML；工具读取你传入的 `file` 或 `material`，原文件不会被修改。Excel 可先转成 JSON/YAML，对话里也能代转。
+
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="docs/assets/dsh-pipeline-check-flow-v5-dark.svg">
+  <img src="docs/assets/dsh-pipeline-check-flow-v5-light.svg" width="100%" alt="dsh-pipeline-check 结构图：材料与规则包汇入 parseMaterial → runCheck；台账环节链按台账级（PC-001）、行内（PC-002/004/006/007）、跨行（PC-005/008）、全链（PC-003）四层范围核对，差异进 issues[]、未执行进 skipped[]，两条通道一起交给复核人">
+</picture>
 
 ## 三步上手
 
@@ -331,7 +336,7 @@ node samples/quickstart/run.mjs --check        # 自带样例（先 build）
 | `rules/evidence/` | 每条引文的核验记录 |
 | `tests/` | vitest；每条规则一对合规/违规夹具 |
 
-自带样例的运行结果可对照 `samples/quickstart/expected/result.json`，截图见 [`docs/assets/quickstart.png`](docs/assets/quickstart.png)。配图由 [`scripts/gen-readme-assets.py`](scripts/gen-readme-assets.py) 程序化生成（Python + Pillow），可重复执行；无 UI 插件只出深浅两版流程图 SVG，五语共用。
+自带样例的运行结果可对照 `samples/quickstart/expected/result.json`，截图见 [`docs/assets/quickstart.png`](docs/assets/quickstart.png)。配图由 [`scripts/gen-readme-assets.py`](scripts/gen-readme-assets.py) 程序化生成——hero 横幅用 Pillow 绘制、结构图用手写 SVG 绘制——可重复执行；README 只引用 hero（中英双版、深浅各一）与 flow-v5 结构图（深浅两版，五语共用），旧的单版流程图与演示图保留在 `docs/assets/` 供外链使用。
 
 ## 家族与致谢
 
