@@ -1,6 +1,6 @@
 {
   "name": "dsh-pipeline-check",
-  "version": "0.2.8",
+  "version": "0.2.10-reconcile.0",
   "description": "项目全流程文件链条核对（按环节先后与金额口径核对链条自洽，仅提示差异，不作出定性结论）",
   "type": "module",
   "main": "lib/index.mjs",
@@ -17,12 +17,13 @@
     "lib",
     "cordis.patch.yml",
     "README.md",
-    "README-zh.md",
+    "README.en.md",
     "locale/*.json",
     "icon.svg",
     "rules",
     "CHANGELOG.md",
     "SECURITY.md",
+    "docs/assets/*",
     "samples",
     "TROUBLESHOOTING.md",
     "screenshots.json",
@@ -89,8 +90,8 @@
     "@deepseek-ai/schemastery": "^3.18.2"
   },
   "devDependencies": {
-    "@deepseek-ai/cordis": "4.0.5-alpha.1",
-    "@deepseek-ai/dsh-package-manifest": "0.2.1-rc.2",
+    "@deepseek-ai/cordis": "4.0.5",
+    "@deepseek-ai/dsh-package-manifest": "0.2.1-rc.3",
     "@deepseek-ai/dsh-tools": "0.2.1-rc.2",
     "@deepseek-ai/schemastery": "3.18.5",
     "@types/node": "^22.20.1",
