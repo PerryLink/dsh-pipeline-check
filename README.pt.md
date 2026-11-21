@@ -45,6 +45,11 @@ O material é JSON ou YAML. A ferramenta lê o `file` ou o `material` que passa 
   <img src="docs/assets/dsh-pipeline-check-flow-v5-light.svg" width="100%" alt="Estrutura do dsh-pipeline-check: o material e o pacote de regras alimentam parseMaterial → runCheck; a cadeia de etapas é lida em quatro âmbitos — registo (PC-001), dentro de uma linha (PC-002/004/006/007), entre linhas (PC-005/008) e toda a cadeia (PC-003); as diferenças vão para issues[] e o que não foi executado para skipped[], e ambos os canais chegam ao revisor">
 </picture>
 
+![dsh-pipeline-check: execução real de terminal](docs/assets/dsh-pipeline-check-demo.gif)
+
+*Repetição animada de uma execução real registrada neste repositório.*
+
+
 ## Instalação em três passos
 
 1. **Instale** (escolha um canal):

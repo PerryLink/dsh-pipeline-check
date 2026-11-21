@@ -36,6 +36,10 @@ dsh plugin --profile <name> add dsh-pipeline-check
 
 ## 它是什么
 
+![dsh-pipeline-check 真实终端运行](docs/assets/dsh-pipeline-check-demo.gif)
+
+*本仓库一次真实运行的动图回放。*
+
 `dsh-pipeline-check` 读取一份项目全流程文件链条台账——项目表头加每个环节文件一行——核对这份台账自身的齐备与自洽：是否写明项目、每行是否填写环节或文件、环节是否按你配置的顺序出现、批复与签署日期是否可解析且先后成立、文件编号是否唯一、金额是否可解析为数值、文件名称栏是否残留模板占位符。
 
 材料是 JSON 或 YAML；工具读取你传入的 `file` 或 `material`，原文件不会被修改。Excel 可先转成 JSON/YAML，对话里也能代转。

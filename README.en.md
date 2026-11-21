@@ -45,6 +45,11 @@ Material is JSON or YAML. The tool reads the `file` or `material` you pass and n
   <img src="docs/assets/dsh-pipeline-check-flow-v5-light.svg" width="100%" alt="dsh-pipeline-check structure: the material and the rule pack feed parseMaterial → runCheck; the stage chain is read at four scopes — ledger level (PC-001), inside a row (PC-002/004/006/007), across rows (PC-005/008) and across the whole chain (PC-003); differences reach issues[] and un-run checks reach skipped[], and both channels go to the reviewer">
 </picture>
 
+![dsh-pipeline-check: real terminal run](docs/assets/dsh-pipeline-check-demo.gif)
+
+*Animated replay of a real run recorded in this repository.*
+
+
 ## Three-step setup
 
 1. **Install** (pick one channel):

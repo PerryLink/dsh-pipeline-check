@@ -45,6 +45,11 @@ dsh plugin --profile <name> add dsh-pipeline-check
   <img src="docs/assets/dsh-pipeline-check-flow-v5-light.svg" width="100%" alt="dsh-pipeline-check की संरचना: सामग्री और नियम-पैक parseMaterial → runCheck में जाते हैं; चरण-शृंखला चार स्तरों पर पढ़ी जाती है — रजिस्टर (PC-001), पंक्ति के भीतर (PC-002/004/006/007), पंक्तियों के बीच (PC-005/008) और पूरी शृंखला (PC-003); अंतर issues[] में और न-चली जाँचें skipped[] में जाती हैं, और दोनों चैनल समीक्षक तक पहुँचते हैं">
 </picture>
 
+![dsh-pipeline-check का असली टर्मिनल रन](docs/assets/dsh-pipeline-check-demo.gif)
+
+*इस रिपॉज़िटरी में दर्ज असली रन का एनिमेटेड रीप्ले।*
+
+
 ## तीन चरणों में शुरुआत
 
 1. **इंस्टॉल करें** (एक चैनल चुनें):
