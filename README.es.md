@@ -11,6 +11,8 @@
 
 Un verificador del registro de la cadena documental de todo el proceso de un proyecto para DeepSeek Harness: lee la cabecera del proyecto más una fila por documento de etapa, aplica ocho reglas a nivel de registro y devuelve solo diferencias, nunca un veredicto de cumplimiento.
 
+Última verificación: DeepSeek Harness `dsh-v0.2.3-alpha.1` (2026-11-22).
+
 [Instalar](#instalación-en-tres-pasos) · [Configuración](#configuración) · [FAQ](#faq) · [简体中文](README.md) · [English](README.en.md) · [Español](README.es.md) · [Português](README.pt.md) · [हिन्दी](README.hi.md)
 
 [![License](https://img.shields.io/badge/license-Apache--2.0-3366CC?style=flat-square&labelColor=2B3245)](LICENSE)
@@ -48,7 +50,6 @@ El material es JSON o YAML. La herramienta lee el `file` o el `material` que ust
 ![dsh-pipeline-check: ejecución real de terminal](docs/assets/dsh-pipeline-check-demo.gif)
 
 *Repetición animada de una ejecución real registrada en este repositorio.*
-
 
 ## Instalación en tres pasos
 
