@@ -7,6 +7,8 @@
 
 # dsh-pipeline-check
 
+Current version `0.2.12`.
+
 **Know exactly what the register is missing — before the review starts, row by row and column by column.**
 
 A project whole-process document chain register checker for DeepSeek Harness: it reads the project header plus one row per stage document, applies eight register-level rules, and returns differences only — never a compliance verdict.
